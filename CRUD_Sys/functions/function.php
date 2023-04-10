@@ -1,6 +1,4 @@
 <?php 
-
-
 // +++++++++++++  redirect  +++++++++++++
 function redirect($path){
   return  header("location:$path");
@@ -35,7 +33,7 @@ function sanitizeData($value){
 
 //+++++++++++++++++++ create database if not exists +++++++++++++++++++
 function CreateNewDB($dbName,$connection){
-    $query = "CREATE DATABASE IF NOT EXISTS `$dbName`";
+    $query = "CREATE DATABASE IF NOT EXISTS `$dbName` CHARACTER SET UTF8 COLLATE utf8_general_ci";
 if(mysqli_query($connection,$query)){
     return true ;
 }else {
@@ -66,7 +64,7 @@ function CreateCatTable($TableName,$DatabaseName){
     $query = "CREATE TABLE IF NOT EXISTS `$TableName`(
         `id` INT(6) AUTO_INCREMENT PRIMARY KEY,
         `name` VARCHAR(30) NOT NULL,
-        `textarea` VARCHAR(50) NOT NULL,        
+        `details` VARCHAR(50) NOT NULL,        
     );";
 if(mysqli_query($dbConn,$query)){
     return true ;
