@@ -2,7 +2,7 @@
 include "../include/header.php";
 include "../database/conn.php";
 $newConn = newConn(DataBaseName);
-
+$result = GetCats($newConn);
 
 ?>
 <h1>Category page</h1>
@@ -17,24 +17,32 @@ $newConn = newConn(DataBaseName);
           </div>
     <div class="row">
       <div class="col-12 mx-auto border rounded pt-2">
-          <a class="btn btn-primary" href="addcategory.php">add product</a>
+          <a class="btn btn-primary" href="addcategory.php">add Category</a>
             <h1>Categories</h1>
             <table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Name</th>
+      <th scope="col">Details</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
+    <?php $i=1; while($row= mysqli_fetch_assoc($result)): ?>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
+      <th scope="row"><?=$i++;?></th>
+      <td><?=$row['name']?></td>
+      <td><?=$row['details']?></td>
+      <td>
+        <a class="btn btn-success" href="editCat.php?id=<?=$row['id'];?>&name=<?=$row['name']?>&details=<?=$row['details']?>">Edit</a> 
+        </td>
+      <td>
+        <a class="btn btn-danger" href="../validations/deleteCat.php?id=<?=$row['id'];?>">Delete</a> 
+        </td>
+      </tr>
+      <?php endwhile; ?>
 
   </tbody>
 </table>

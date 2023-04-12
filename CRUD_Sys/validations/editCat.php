@@ -5,7 +5,6 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
     $errors = [];
-    $shaPass = '';
     $id=$_GET['id'];
     // ================sanitization=================
     foreach ($_POST as $key => $value) {
@@ -20,22 +19,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
     } elseif (MaxLen($name, 35)) {
         $errors[] = ' error : name must be less than 35 chars ';
     }
-    //password
-    if (empty($password)) {
-        $errors[] = ' error : password is required ';
-    } elseif (MinLen($password, 6)) {
-        $errors[] = ' error : password must be more than 3 char ';
-    } elseif (MaxLen($password, 20)) {
-        $errors[] = ' error : password must be less than 20 chars ';
+    //details
+    if (empty($details)) {
+        $errors[] = ' error : details is required ';
+    } elseif (MinLen($details, 10)) {
+        $errors[] = ' error : details must be more than 3 char ';
+    } elseif (MaxLen($details, 35)) {
+        $errors[] = ' error : details must be less than 35 chars ';
     }
-    // conf_password
-    if ($password !== $Conf_password) {
-        $errors[] = ' error : confirm password not the same';
-    }
+    
     // =============================================
     // =================if no error====================
     if (empty($errors)) {
-        
+    
         //1 - check connection
         if (!$conn) {
             echo "error check connection";
@@ -43,22 +39,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
         }
         // new connection to use
         $NewConn = newConn(DataBaseName);
-        //2 - Update USERS table  
-            $shaPass = sha1($password);         // hash password
+        //2 - Update Cat table
             // Update data into table
         if ($NewConn) {
-            $UpdatetQuery = " UPDATE `users` SET `name` = '$name', `password`='$shaPass' WHERE `id`='$id' ";
+            $UpdatetQuery = " UPDATE `category` SET `name` = '$name', `details`='$details' WHERE `id`='$id' ";
             if (mysqli_query($NewConn, $UpdatetQuery)) {
                 $_SESSION['success'] = ['user has been edited successfully'];
-                redirect('../pages/users.php');
+                redirect('../pages/category.php');
             } else {
                 echo 'error : cant update data';
             }
         } 
     } else {
         $_SESSION['danger'] = $errors;
-        // $_SESSION['old'] = ["$name", "$email"];
-        redirect("../pages/editUser.php?id=$id&name=$name");
+        redirect("../pages/editCat.php?id=$id&name=$name&details=$details");
     }
 } else {
     redirect("../index.php");

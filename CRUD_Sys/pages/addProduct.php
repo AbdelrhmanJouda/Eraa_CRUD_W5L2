@@ -2,6 +2,8 @@
 include  "../include/header.php";
 if(!isset($_SESSION['logedin'])){
     redirect('../index.php');
+}elseif(!isset($_SERVER['HTTP_REFERER'])){
+    redirect('../index.php');
 }
 ?>
 

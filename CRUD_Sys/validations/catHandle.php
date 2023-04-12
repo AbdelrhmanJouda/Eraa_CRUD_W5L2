@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = ' error : name is required ';
     } elseif (MinLen($name, 2)) {
         $errors[] = ' error : name must be more than 3 char ';
-    } elseif (MaxLen($name, 10)) {
+    } elseif (MaxLen($name, 35)) {
         $errors[] = ' error : name must be less than 35 chars ';
     }
     //details
@@ -42,8 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // category table hass been created
             // insert data into table
             if ($NewConn) {
-                $insertQuery = "INSERT INTO `category`
-                 (`name`,`details`) VALUES ('$name','$details') ";
+                $insertQuery = "INSERT INTO `category`(`name`,`details`) 
+                VALUES ('$name','$details') ";
                 if (mysqli_query($NewConn, $insertQuery)) {
                     $_SESSION['success'] = ['Category has been added successfully'];
                     redirect('../pages/category.php');

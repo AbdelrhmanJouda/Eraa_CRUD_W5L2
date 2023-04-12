@@ -1,13 +1,12 @@
 <?php
 include  "../include/header.php";
 
-if(isset($_GET['name']) ){
+if(isset($_GET['name']) && isset($_SERVER['HTTP_REFERER']) ){
     $name=$_GET['name'];
     $id=$_GET['id'];
 }else{
     redirect('home.php');
 }
-
 ?>
 
 <h1>Edit user page</h1>

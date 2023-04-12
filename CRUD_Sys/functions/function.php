@@ -65,7 +65,7 @@ function CreateCatTable($TableName,$DatabaseName){
         `id` INT(6) AUTO_INCREMENT PRIMARY KEY,
         `name` VARCHAR(30) NOT NULL,
         `details` VARCHAR(50) NOT NULL,
-        `Date_Time` DATETIME DEFAULT CURRENT_TIMESTAMP         
+        `Date_Time` DATETIME DEFAULT CURRENT_TIMESTAMP  
     );";
 if(mysqli_query($dbConn,$query)){
     return true ;
@@ -99,17 +99,25 @@ function newConn($databaseName){
         return mysqli_query($newConn,$selectQuery);
     }
 // ++++++++++++++++++++++++++++++++++++++
-// +++++++++++++  get user name  +++++++++++++
+// +++++++++++++  get user name  +++++++++++++?????
     function GetUser($result){
      $row = mysqli_fetch_assoc($result);
      return $row;
     }
+
 // ++++++++++++++++++++++++++++++++++++++
 // +++++++++++++  Read All Users  +++++++++++++
     function GetUsers($connection){
         $query = "SELECT * FROM `users`";
         $result = mysqli_query($connection,$query);
         
+        return $result;
+    }
+// ++++++++++++++++++++++++++++++++++++++
+// +++++++++++++  Read All Users  +++++++++++++
+    function GetCats($connection){
+        $query = "SELECT * FROM `category`";
+        $result = mysqli_query($connection,$query);
         return $result;
     }
 // ++++++++++++++++++++++++++++++++++++++
