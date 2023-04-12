@@ -3,9 +3,14 @@ include  "../include/header.php";
 if(isset($_SESSION['logedin'])){
     redirect('../index.php');
 }
+// $n='';
+// $e='';
+// if(isset($_GET['name'])&& isset($_GET['email'])){
+//     $n = $_GET['name'];
+//     $e = $_GET['email'];
+// }
+
 ?>
-
-
 
 <h1>Registeraion page</h1>
 
@@ -22,11 +27,11 @@ if(isset($_SESSION['logedin'])){
 
                 <div class="mb-3">
                     <label  class="form-label">Name</label>
-                    <input type="text" name="name" value="<?php if(isset($_SESSION['old'])): echo $_SESSION['old'][0];  endif; ?>" class="form-control" >
+                    <input type="text" name="name" value="<?php if(isset($_GET['name'])): echo $_GET['name'];  endif; ?>" class="form-control" >
                 </div>
                 <div class="mb-3">
                     <label  class="form-label">Email</label>
-                    <input type="text" name="email" value="<?php if(isset($_SESSION['old'])): echo $_SESSION['old'][1]; unset($_SESSION['old']); endif; ?>" class="form-control" >
+                    <input type="text" name="email" value="<?php if(isset($_GET['email'])): echo $_GET['email'];endif; ?>" class="form-control" >
                 </div>
                 <div class="mb-3">
                     <label  class="form-label">Password</label>

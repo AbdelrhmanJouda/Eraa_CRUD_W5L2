@@ -57,7 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         // new connection to use
         $NewConn = newConn(DataBaseName);
-
         //2 - create USERS table  
         if (CreateUserTable('users', DataBaseName)) {
             // user table hass been created
@@ -82,8 +81,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         $_SESSION['danger'] = $errors;
-        $_SESSION['old'] = ["$name", "$email"];
-        redirect('../pages/register.php');
+        // $_SESSION['old'] = ["$name", "$email"];
+        redirect("../pages/register.php?name=$name&email=$email");
     }
 } else {
     redirect("../index.php");

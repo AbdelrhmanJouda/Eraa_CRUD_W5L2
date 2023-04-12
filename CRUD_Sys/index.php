@@ -1,4 +1,1 @@
-<?php
-  header("location:pages/home.php");
-    
-?>
+<?php header("location:pages/login.php");?>

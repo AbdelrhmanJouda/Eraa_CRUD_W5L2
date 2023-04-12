@@ -27,21 +27,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (MaxLen($details, 35)) {
         $errors[] = ' error : details must be less than 35 chars ';
     }
-    
     // =============================================
     // =================if no error====================
-
     if (empty($errors)) {
-        
         //1 - check connection
         if (!$conn) {
             echo "error check connection";
             die(mysqli_connect_error());
-        } elseif (CreateNewDB(DataBaseName, $conn)) {    // if no database ->  create new database 
-            $_SESSION['success'] = [' New data base has been created '];
-        } else {
-            echo "can't create database";
-            die;
         }
         // new connection to use
         $NewConn = newConn(DataBaseName);

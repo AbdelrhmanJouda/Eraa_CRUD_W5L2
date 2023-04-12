@@ -34,6 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SERVER['HTTP_REFERER'])) {
         //check if data exists
         //check if table exists
         //make connection with database
+
+        
         if(newConn(DataBaseName)){
         $NewConn = newConn(DataBaseName);
         // select all data from table
@@ -50,7 +52,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SERVER['HTTP_REFERER'])) {
                 $_SESSION['danger']=['email or password not match'];
                 redirect('../pages/login.php');
         }
+        } else{
+            $_SESSION['danger']= ['make a register to start using th app'];
+            redirect("../pages/register.php");
         }
+    
 
 
     } else {

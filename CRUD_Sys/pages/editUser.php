@@ -1,6 +1,5 @@
 <?php
 include  "../include/header.php";
-var_dump($_SESSION);
 
 if(isset($_GET['name']) ){
     $name=$_GET['name'];
@@ -9,10 +8,7 @@ if(isset($_GET['name']) ){
     redirect('home.php');
 }
 
-
 ?>
-
-
 
 <h1>Edit user page</h1>
 

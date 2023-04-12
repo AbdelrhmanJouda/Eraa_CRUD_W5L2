@@ -64,7 +64,8 @@ function CreateCatTable($TableName,$DatabaseName){
     $query = "CREATE TABLE IF NOT EXISTS `$TableName`(
         `id` INT(6) AUTO_INCREMENT PRIMARY KEY,
         `name` VARCHAR(30) NOT NULL,
-        `details` VARCHAR(50) NOT NULL,        
+        `details` VARCHAR(50) NOT NULL,
+        `Date_Time` DATETIME DEFAULT CURRENT_TIMESTAMP         
     );";
 if(mysqli_query($dbConn,$query)){
     return true ;
@@ -75,8 +76,16 @@ if(mysqli_query($dbConn,$query)){
 //++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++ New connection +++++++++++++++++++
 function newConn($databaseName){
-    $NewConn = mysqli_connect('localhost','root','',$databaseName);
-   return $NewConn; 
+    $conn= mysqli_connect('localhost','root','');
+    if($conn){
+        $query = " SHOW DATABASES LIKE '$databaseName' ";
+        $result = mysqli_query($conn,$query);
+        $row = mysqli_num_rows($result);
+        if($row > 0){
+            $NewConn = mysqli_connect('localhost','root','',$databaseName);
+           return $NewConn; 
+        }
+    }return false;
 }
 //++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++Insert INTO Table +++++++++++++++++++
