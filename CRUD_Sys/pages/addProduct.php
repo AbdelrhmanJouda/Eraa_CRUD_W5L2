@@ -1,11 +1,11 @@
 <?php
 include  "../include/header.php";
-include "../database/conn.php";
 if(!isset($_SESSION['logedin'])){
     redirect('../index.php');
 }elseif(!isset($_SERVER['HTTP_REFERER'])){
     redirect('../index.php');
 }
+include "../database/conn.php";
 $NewConn = newConn(DataBaseName);
 $result = GetCats($NewConn);
 ?>
@@ -39,7 +39,7 @@ $result = GetCats($NewConn);
                 </div>
                 <div class="mb-3">
                     <label  class="form-label">category</label>
-                    <select type="select" name="category" class="form-control" >
+                    <select type="select" name="category_id" class="form-control" >
                     <?php while ($row = mysqli_fetch_assoc($result)): ?>    
                     <option value="<?= $row['name'] ?>"><?= $row['name']?></option>
                     <?php endwhile; ?>
@@ -47,7 +47,7 @@ $result = GetCats($NewConn);
                 </div>
                 <div class="mb-3">
                     <label  class="form-label">added by</label>
-                    <select type="select" name="user" class="form-control" >
+                    <select type="select" name="user_id" class="form-control" >
                         <option value="<?= UserName('user') ?>"><?= UserName('user') ?></option>
                     </select>
                 </div>

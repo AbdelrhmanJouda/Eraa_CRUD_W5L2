@@ -34,15 +34,24 @@ $result = GetPros($newConn);
   </thead>
   <tbody>
     <tr>
-      <?php $i=1; while($row = mysqli_fetch_assoc($result)) ?>
-      <th scope="row">1</th>
+      <?php $i=1; while($row = mysqli_fetch_assoc($result)): ?>
+      <th scope="row"><?=$i++?></th>
       <td><?= $row['id'] ?></td>
       <td><?= $row['name'] ?></td>
       <td><?= $row['price'] ?></td>
-      <td><?= $row['category'] ?></td>
+      <td><?= $row['stock'] ?></td>
+      <td><?= $row['category_id'] ?></td>
+      <td><?= $row['user_id'] ?></td>
+      <td>
+        <a class="btn btn-success" href="editPro.php?id=<?=$row['id'];?>&name=<?=$row['name']?>">Edit</a> 
+        </td>
+      <td>
+        <a class="btn btn-danger" href="../validations/deletePro.php?id=<?=$row['id'];?>">Delete</a> 
+        </td>
+      </tr>
     
     </tr>
-
+  <?php endwhile; ?>
   </tbody>
 </table>
         </div>

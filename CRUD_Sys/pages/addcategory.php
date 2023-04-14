@@ -17,7 +17,7 @@ if(!isset($_SESSION['logedin'])){
             </div>
             <!-- end msg -->
 
-            <form   method="post" action="<?php echo BASE_URL."validations/proHandle.php" ?>">
+            <form   method="post" action="<?php echo BASE_URL."validations/catHandle.php" ?>">
                 <div class="mb-3">
                     <label  class="form-label">Category Name</label>
                     <input type="text" name="name" value="<?php if(isset($_GET['name'])): echo $_GET['name']; endif;  ?>" class="form-control" >

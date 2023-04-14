@@ -38,7 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // new connection to use
         $NewConn = newConn(DataBaseName);
         //2 - create Category table
-        if (CreateCatTable('category', DataBaseName)) {
             // category table hass been created
             // insert data into table
             if ($NewConn) {
@@ -49,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     redirect('../pages/category.php');
                 }
             }
-        }
     } else {
         $_SESSION['danger'] = $errors;
         redirect("../pages/addcategory.php?name=$name&details=$details");

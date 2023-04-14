@@ -60,25 +60,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //2 - create USERS table  
         if (CreateUserTable('users', DataBaseName)) {
             // user table hass been created
+            // I NEED TO CTERATE ALL OTHER TABLES NOW
+            //CATEGORY TABLE
+            CreateCatTable('category',DataBaseName);
+            //PRODUCTS TABLE
+            CreateProTable('products',DataBaseName);
+            //
             $shaPass = sha1($password);         // hash password
             // insert data into table
             if ($NewConn) {
+                if(emailexists($email,$NewConn)){
+                    unset($_SESSION['success']);
+                    $_SESSION['danger'] = ['error : this email extists'];
+                    redirect("../pages/register.php?name=$name");
+                    die;
+                }
+
                 $insertQuery = "INSERT INTO `users`
                  (`name`,`email`,`password`) VALUES ('$name','$email','$shaPass') ";
                 if (mysqli_query($NewConn, $insertQuery)) {
-                    // I NEED TO CTERATE ALL OTHER TABLES NOW
-                    //CATEGORY TABLE
-                    CreateCatTable('category',DataBaseName);
-                    //PRODUCTS TABLE
-                    CreateProTable('products',DataBaseName);
-                    //
                     // 
                     $_SESSION['success'] = ['user has been added successfully'];
-                    unset($_SESSION['old']);
+
                     redirect('../pages/login.php');
                 } else {
-                    echo 'errror : table cant insert query';
+                    $errors[]= 'errror : table cant insert query';
                 }
+
             } else {
                 echo 'error connection';
             }

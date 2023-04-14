@@ -81,7 +81,7 @@ function CreateProTable($TableName,$DatabaseName){
         `id` INT(6) AUTO_INCREMENT PRIMARY KEY,
         `name` VARCHAR(30) NOT NULL,
         `price` DECIMAL (6,2) NOT NULL,
-        `stock` BOOLEAN NOT NULL,
+        `stock` INT NOT NULL,
         `category_id` INT,
         `user_id` INT,
         `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -119,6 +119,15 @@ function newConn($databaseName){
         $shaPass = sha1($password);
         $selectQuery = "SELECT * FROM `users` WHERE `email` = '$email' AND `password` = '$shaPass' ";
         return mysqli_query($newConn,$selectQuery);
+    }
+// ++++++++++++++++++++++++++++++++++++++
+// +++++++++++++  check email query  +++++++++++++
+    function emailexists($email,$connection){
+        $querycheck = " SELECT * FROM `users` WHERE `email` = '$email' ";
+        $result =  mysqli_query($connection,$querycheck);
+        if(mysqli_num_rows($result) != 0){
+            return true;
+        }return false;
     }
 // ++++++++++++++++++++++++++++++++++++++
 // +++++++++++++  get user name  +++++++++++++?????

@@ -24,6 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = ' error : price must be more than 3 char ';
     } elseif (MaxLen($price, 6)) {
         $errors[] = ' error : price must be less than 6 chars ';
+    }elseif(!is_numeric($price)){
+        $errors[] = 'error : price should be number';
     }
     //stock
     if (empty($stock)) {
@@ -32,6 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = ' error : stock must be more than 3 char ';
     } elseif (MaxLen($stock, 6)) {
         $errors[] = ' error : stock must be less than 6 chars ';
+    }elseif(!is_numeric($stock)){
+        $errors[] = 'error : stock should be number';
     }
     //category
     if (empty($category)) {
@@ -51,9 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // =============================================
     // =================if no error====================
-
     if (empty($errors)) {
-        
+      
         //1 - check connection
         if (!$conn) {
             echo "error check connection";
@@ -62,31 +65,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // new connection to use
         $NewConn = newConn(DataBaseName);
         //2 - create Products table  
-        if (CreateProTable('products', DataBaseName)) {
-            // user table hass been created
-            $shaPass = sha1($password);         // hash password
+            // products table hass been created
             // insert data into table
             if ($NewConn) {
-                $insertQuery = "INSERT INTO `products`
-                 (`name`,`email`,`password`) VALUES ('$name','$email','$shaPass') ";
+                $insertQuery = "INSERT INTO `products`(`name`,`price`,`stock`,`category_id`,`user_id`) 
+                VALUES ('$name','$price','$stock','$category_id','$user_id') ";
                 if (mysqli_query($NewConn, $insertQuery)) {
-                    $_SESSION['success'] = ['user has been added successfully'];
-                    unset($_SESSION['old']);
-                    redirect('../pages/login.php');
-                } else {
-                    echo 'errror : table cant insert query';
+                    $_SESSION['success'] = ['product has been added successfully'];
+                    redirect('../pages/products.php');
                 }
-            } else {
-                echo 'error connection';
             }
-        } else {
-            echo "faild to create table";
-            die(mysqli_connect_error());
-        }
-    } else {
+    } else { 
         $_SESSION['danger'] = $errors;
-        $_SESSION['old'] = ["$name", "$email"];
-        redirect('../pages/register.php');
+        redirect('../pages/addProduct.php');
     }
 } else {
     redirect("../index.php");
