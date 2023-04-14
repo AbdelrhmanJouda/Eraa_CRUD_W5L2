@@ -2,7 +2,7 @@
 include "../include/header.php";
 include "../database/conn.php";
 $newConn = newConn(DataBaseName);
-
+$result = GetPros($newConn);
 
 ?>
 <h1>Products page</h1>
@@ -23,17 +23,24 @@ $newConn = newConn(DataBaseName);
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Cat</th>
+      <th scope="col">By</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <?php $i=1; while($row = mysqli_fetch_assoc($result)) ?>
       <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <td><?= $row['id'] ?></td>
+      <td><?= $row['name'] ?></td>
+      <td><?= $row['price'] ?></td>
+      <td><?= $row['category'] ?></td>
+    
     </tr>
 
   </tbody>
@@ -41,11 +48,6 @@ $newConn = newConn(DataBaseName);
         </div>
     </div>
 </div>
-
-
-
-
-
 
 
 <?php include "../include/footer.php"; ?>

@@ -66,6 +66,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $insertQuery = "INSERT INTO `users`
                  (`name`,`email`,`password`) VALUES ('$name','$email','$shaPass') ";
                 if (mysqli_query($NewConn, $insertQuery)) {
+                    // I NEED TO CTERATE ALL OTHER TABLES NOW
+                    //CATEGORY TABLE
+                    CreateCatTable('category',DataBaseName);
+                    //PRODUCTS TABLE
+                    CreateProTable('products',DataBaseName);
+                    //
+                    // 
                     $_SESSION['success'] = ['user has been added successfully'];
                     unset($_SESSION['old']);
                     redirect('../pages/login.php');

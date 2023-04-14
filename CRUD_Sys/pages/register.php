@@ -3,13 +3,6 @@ include  "../include/header.php";
 if(isset($_SESSION['logedin'])){
     redirect('../index.php');
 }
-// $n='';
-// $e='';
-// if(isset($_GET['name'])&& isset($_GET['email'])){
-//     $n = $_GET['name'];
-//     $e = $_GET['email'];
-// }
-
 ?>
 
 <h1>Registeraion page</h1>
@@ -24,7 +17,6 @@ if(isset($_SESSION['logedin'])){
             <!-- end msg -->
 
             <form   method="post" action="<?php echo BASE_URL."validations/regHandle.php" ?>">
-
                 <div class="mb-3">
                     <label  class="form-label">Name</label>
                     <input type="text" name="name" value="<?php if(isset($_GET['name'])): echo $_GET['name'];  endif; ?>" class="form-control" >
@@ -42,16 +34,11 @@ if(isset($_SESSION['logedin'])){
                     <input type="text" name="Conf_password" class="form-control" >
                 </div>
               
-                
-               
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-
-
 
         </div>
     </div>
 </div>
-
 
 <?php include  "../include/footer.php"; ?>

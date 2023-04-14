@@ -7,7 +7,7 @@ if(!isset($_SESSION['logedin'])){
 }
 ?>
 
-<h1>Category page</h1>
+<h1>Add Category page</h1>
 <div class="container">
     <div class="row">
         <div class="col-8 mx-auto">
@@ -17,7 +17,7 @@ if(!isset($_SESSION['logedin'])){
             </div>
             <!-- end msg -->
 
-            <form   method="post" action="<?php echo BASE_URL."validations/catHandle.php" ?>">
+            <form   method="post" action="<?php echo BASE_URL."validations/proHandle.php" ?>">
                 <div class="mb-3">
                     <label  class="form-label">Category Name</label>
                     <input type="text" name="name" value="<?php if(isset($_GET['name'])): echo $_GET['name']; endif;  ?>" class="form-control" >

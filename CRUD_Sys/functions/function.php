@@ -74,6 +74,28 @@ if(mysqli_query($dbConn,$query)){
 }
 }
 //++++++++++++++++++++++++++++++++++++++
+//+++++++++++++++++++ create PRODUCTS table if not exists +++++++++++++++++++
+function CreateProTable($TableName,$DatabaseName){
+    $dbConn = mysqli_connect("localhost","root","",$DatabaseName);
+    $query = "CREATE TABLE IF NOT EXISTS `$TableName`(
+        `id` INT(6) AUTO_INCREMENT PRIMARY KEY,
+        `name` VARCHAR(30) NOT NULL,
+        `price` DECIMAL (6,2) NOT NULL,
+        `stock` BOOLEAN NOT NULL,
+        `category_id` INT,
+        `user_id` INT,
+        `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+        `updated_at`  TIMESTAMP,
+        FOREIGN KEY(`category_id`) REFERENCES category(`id`),
+        FOREIGN KEY(`user_id`) REFERENCES users(`id`)
+    );";
+if(mysqli_query($dbConn,$query)){
+    return true ;
+}else {
+    return  false;
+}
+}
+//++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++ New connection +++++++++++++++++++
 function newConn($databaseName){
     $conn= mysqli_connect('localhost','root','');
@@ -108,15 +130,22 @@ function newConn($databaseName){
 // ++++++++++++++++++++++++++++++++++++++
 // +++++++++++++  Read All Users  +++++++++++++
     function GetUsers($connection){
-        $query = "SELECT * FROM `users`";
+        $query = "SELECT * FROM  `users`";
         $result = mysqli_query($connection,$query);
         
         return $result;
     }
 // ++++++++++++++++++++++++++++++++++++++
-// +++++++++++++  Read All Users  +++++++++++++
+// +++++++++++++  Read All Categories  +++++++++++++
     function GetCats($connection){
-        $query = "SELECT * FROM `category`";
+        $query = "SELECT * FROM  `category`";
+        $result = mysqli_query($connection,$query);
+        return $result;
+    }
+// ++++++++++++++++++++++++++++++++++++++
+// +++++++++++++  Read All Pros  +++++++++++++
+    function GetPros($connection){
+        $query = "SELECT * FROM  `products`";
         $result = mysqli_query($connection,$query);
         return $result;
     }

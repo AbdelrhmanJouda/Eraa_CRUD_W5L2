@@ -1,13 +1,9 @@
 <?php
 include "../functions/function.php";
 include "../database/conn.php";
-session_start();
-echo "here";
-die;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = [];
-    $_SESSION['old']=[];
-    $shaPass = '';
     // ================sanitization=================
     foreach ($_POST as $key => $value) {
         $$key = sanitizeData($value);
@@ -21,25 +17,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (MaxLen($name, 35)) {
         $errors[] = ' error : name must be less than 35 chars ';
     }
-    //email
-    if (empty($email)) {
-        $errors[] = ' error : email is required ';
-    } elseif (checkEmail($email)) {
-        $errors[] = ' error : email is not valid ';
-    } elseif (MaxLen($email, 80)) {
-        $errors[] = ' error : email length not accepted ';
+    //price
+    if (empty($price)) {
+        $errors[] = ' error : price is required ';
+    } elseif (MinLen($price, 2)) {
+        $errors[] = ' error : price must be more than 3 char ';
+    } elseif (MaxLen($price, 6)) {
+        $errors[] = ' error : price must be less than 6 chars ';
     }
-    //password
-    if (empty($password)) {
-        $errors[] = ' error : password is required ';
-    } elseif (MinLen($password, 6)) {
-        $errors[] = ' error : password must be more than 3 char ';
-    } elseif (MaxLen($password, 20)) {
-        $errors[] = ' error : password must be less than 20 chars ';
+    //stock
+    if (empty($stock)) {
+        $errors[] = ' error : stock is required ';
+    } elseif (MinLen($stock, 2)) {
+        $errors[] = ' error : stock must be more than 3 char ';
+    } elseif (MaxLen($stock, 6)) {
+        $errors[] = ' error : stock must be less than 6 chars ';
     }
-    // conf_password
-    if ($password !== $Conf_password) {
-        $errors[] = ' error : confirm password not the same';
+    //category
+    if (empty($category)) {
+        $errors[] = ' error : category is required ';
+    } elseif (MinLen($category, 2)) {
+        $errors[] = ' error : category must be more than 3 char ';
+    } elseif (MaxLen($category, 35)) {
+        $errors[] = ' error : category must be less than 35 chars ';
+    }
+    //user
+    if (empty($user)) {
+        $errors[] = ' error : user is required ';
+    } elseif (MinLen($user, 2)) {
+        $errors[] = ' error : user must be more than 3 char ';
+    } elseif (MaxLen($user, 35)) {
+        $errors[] = ' error : user must be less than 35 chars ';
     }
     // =============================================
     // =================if no error====================
@@ -50,22 +58,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!$conn) {
             echo "error check connection";
             die(mysqli_connect_error());
-        } elseif (CreateNewDB(DataBaseName, $conn)) {    // if no database ->  create new database 
-            $_SESSION['success'] = [' New data base has been created '];
-        } else {
-            echo "can't create database";
-            die;
         }
         // new connection to use
         $NewConn = newConn(DataBaseName);
-
-        //2 - create USERS table  
-        if (CreateUserTable('users', DataBaseName)) {
+        //2 - create Products table  
+        if (CreateProTable('products', DataBaseName)) {
             // user table hass been created
             $shaPass = sha1($password);         // hash password
             // insert data into table
             if ($NewConn) {
-                $insertQuery = "INSERT INTO `users`
+                $insertQuery = "INSERT INTO `products`
                  (`name`,`email`,`password`) VALUES ('$name','$email','$shaPass') ";
                 if (mysqli_query($NewConn, $insertQuery)) {
                     $_SESSION['success'] = ['user has been added successfully'];

@@ -21,7 +21,7 @@ if( isset($_SERVER['HTTP_REFERER']) ){
             </div>
             <!-- end msg -->
 
-            <form   method="post" action="<?php echo BASE_URL."validations/editCat.php?id=$id" ?>">
+            <form method="post" action="<?php echo BASE_URL."validations/editCat.php?id=$id" ?>">
 
                 <div class="mb-3">
                     <label  class="form-label">Name</label>
