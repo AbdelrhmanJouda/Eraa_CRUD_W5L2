@@ -1,6 +1,7 @@
 <?php
 include "../functions/function.php";
 include "../database/conn.php";
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = [];
@@ -77,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
     } else { 
         $_SESSION['danger'] = $errors;
-        redirect('../pages/addProduct.php');
+        redirect("../pages/addProduct.php");
     }
 } else {
     redirect("../index.php");

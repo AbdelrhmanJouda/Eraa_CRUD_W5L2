@@ -1,11 +1,11 @@
 <?php
 include  "../include/header.php";
+include "../database/conn.php";
 if(!isset($_SESSION['logedin'])){
     redirect('../index.php');
 }elseif(!isset($_SERVER['HTTP_REFERER'])){
     redirect('../index.php');
 }
-include "../database/conn.php";
 $NewConn = newConn(DataBaseName);
 $result = GetCats($NewConn);
 ?>
@@ -16,12 +16,12 @@ $result = GetCats($NewConn);
 
 <div class="container">
     <div class="row">
-        <div class="col-8 mx-auto">
-            <!-- msg -->
-            <div class="col-8 mx-auto text-center d-flex flex-wrap">
-                <?php  msgSeesion('danger');?>
-            </div>
-            <!-- end msg -->
+        <!-- msg -->
+        <div class="col-8 mx-auto text-center d-flex flex-wrap">
+            <?php  msgSeesion('danger');?>
+        </div>
+        <!-- end msg -->
+        <div class="col-8 mx-auto border rounded">
 
             <form   method="post" action="<?php echo BASE_URL."validations/productHandle.php" ?>">
 

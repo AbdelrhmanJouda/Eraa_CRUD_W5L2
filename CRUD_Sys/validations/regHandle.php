@@ -5,7 +5,6 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = [];
-    $_SESSION['old']=[];
     $shaPass = '';
     // ================sanitization=================
     foreach ($_POST as $key => $value) {
@@ -86,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 } else {
                     $errors[]= 'errror : table cant insert query';
                 }
-
+                
             } else {
                 echo 'error connection';
             }
@@ -96,7 +95,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         $_SESSION['danger'] = $errors;
-        // $_SESSION['old'] = ["$name", "$email"];
         redirect("../pages/register.php?name=$name&email=$email");
     }
 } else {

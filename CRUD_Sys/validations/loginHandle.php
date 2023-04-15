@@ -5,7 +5,6 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SERVER['HTTP_REFERER'])) {
     $errors = [];
-    $_SESSION['old']=[];
     $shaPass = '';
     // ================sanitization=================
     foreach ($_POST as $key => $value) {
@@ -61,7 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SERVER['HTTP_REFERER'])) {
 
     } else {
         $_SESSION['danger'] = $errors;
-        $_SESSION['old'] = ["$name", "$email"];
         redirect('../pages/login.php');
     }
 } else {
