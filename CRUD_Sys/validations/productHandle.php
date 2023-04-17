@@ -31,29 +31,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //stock
     if (empty($stock)) {
         $errors[] = ' error : stock is required ';
-    } elseif (MinLen($stock, 2)) {
-        $errors[] = ' error : stock must be more than 3 char ';
     } elseif (MaxLen($stock, 6)) {
         $errors[] = ' error : stock must be less than 6 chars ';
     }elseif(!is_numeric($stock)){
         $errors[] = 'error : stock should be number';
     }
     //category
-    if (empty($category)) {
-        $errors[] = ' error : category is required ';
-    } elseif (MinLen($category, 2)) {
-        $errors[] = ' error : category must be more than 3 char ';
-    } elseif (MaxLen($category, 35)) {
-        $errors[] = ' error : category must be less than 35 chars ';
-    }
+    
     //user
-    if (empty($user)) {
-        $errors[] = ' error : user is required ';
-    } elseif (MinLen($user, 2)) {
-        $errors[] = ' error : user must be more than 3 char ';
-    } elseif (MaxLen($user, 35)) {
-        $errors[] = ' error : user must be less than 35 chars ';
-    }
+   
     // =============================================
     // =================if no error====================
     if (empty($errors)) {
@@ -78,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
     } else { 
         $_SESSION['danger'] = $errors;
-        redirect("../pages/addProduct.php");
+        redirect("../pages/addProduct.php?name=$name&price=$price");
     }
 } else {
     redirect("../index.php");

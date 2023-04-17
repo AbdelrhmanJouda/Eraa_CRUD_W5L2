@@ -16,7 +16,7 @@ $result = GetPros($newConn);
   <!-- end msg -->
           </div>
     <div class="row">
-      <div class="col-12 mx-auto border rounded pt-2">
+      <div class="col mx-auto border rounded pt-2">
           <a class="btn btn-primary" href="addProduct.php">add product</a>
             <h1>products</h1>
             <table class="table">
@@ -26,9 +26,9 @@ $result = GetPros($newConn);
       <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col">Price</th>
-      <th scope="col">Cat</th>
-      <th scope="col">By</th>
-      <th scope="col">Edit</th>
+      <th scope="col">Stock</th>
+      <th scope="col">Cat id</th>
+      <th scope="col">user id</th>
       <th scope="col">Delete</th>
     </tr>
   </thead>
@@ -42,9 +42,7 @@ $result = GetPros($newConn);
       <td><?= $row['stock'] ?></td>
       <td><?= $row['category_id'] ?></td>
       <td><?= $row['user_id'] ?></td>
-      <td>
-        <a class="btn btn-success" href="editPro.php?id=<?=$row['id'];?>&name=<?=$row['name']?>">Edit</a> 
-        </td>
+      
       <td>
         <a class="btn btn-danger" href="../validations/deletePro.php?id=<?=$row['id'];?>">Delete</a> 
         </td>

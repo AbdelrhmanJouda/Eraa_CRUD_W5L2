@@ -16,7 +16,7 @@
                 // session of username
                 function UserName($user){
                     if(isset($_SESSION[$user])){
-                       $username= $_SESSION[$user]['name'];
+                       $username= $_SESSION[$user];
                     }
                     return $username;
                 }

@@ -5,7 +5,6 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = [];
-    $shaPass = '';
     // ================sanitization=================
     foreach ($_POST as $key => $value) {
         $$key = sanitizeData($value);

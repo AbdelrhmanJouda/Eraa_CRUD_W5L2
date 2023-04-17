@@ -9,7 +9,7 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="#">AJ-CRUD SYS</a>
     <?php if(isset($_SESSION['user'])): ?>
-    <span value=""><?=UserName('user');?></span>
+    <span value=""><?=UserName('user')['name'];?></span>
     <?php endif;?>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

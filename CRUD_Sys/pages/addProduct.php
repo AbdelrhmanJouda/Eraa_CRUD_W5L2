@@ -35,20 +35,20 @@ $result = GetCats($NewConn);
                 </div>
                 <div class="mb-3">
                     <label  class="form-label">stock</label>
-                    <input type="text" name="stock" value="<?php if(isset($_GET['price'])): echo $_GET['price']; endif; ?>" class="form-control" >
+                    <input type="text" name="stock" value="<?php if(isset($_GET['stock'])): echo $_GET['price']; endif; ?>" class="form-control" >
                 </div>
                 <div class="mb-3">
                     <label  class="form-label">category</label>
-                    <select type="select" name="category_id" class="form-control" >
+                    <select name="category_id" class="form-control" >
                     <?php while ($row = mysqli_fetch_assoc($result)): ?>    
-                    <option value="<?= $row['name'] ?>"><?= $row['name']?></option>
+                    <option value="<?= $row['id'] ?>"><?= $row['name']?></option>
                     <?php endwhile; ?>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label  class="form-label">added by</label>
-                    <select type="select" name="user_id" class="form-control" >
-                        <option value="<?= UserName('user') ?>"><?= UserName('user') ?></option>
+                    <select name="user_id" class="form-control" >
+                        <option value="<?= UserName('user')['id'] ?>"><?= UserName('user')['name'] ?></option>
                     </select>
                 </div>
                              

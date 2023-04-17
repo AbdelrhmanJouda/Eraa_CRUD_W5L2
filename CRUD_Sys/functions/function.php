@@ -4,13 +4,11 @@ function redirect($path){
   return  header("location:$path");
 }
 // ++++++++++++++++++++++++++++++++++++++
-
 // +++++++++++++  sanitize value  +++++++++++++
 function sanitizeData($value){
     return trim(htmlentities(htmlspecialchars($value)));
 }
 // ++++++++++++++++++++++++++++++++++++++
-
 // +++++++++++++  validations  +++++++++++++
     //name //email //password //conf_password
     // max // min
@@ -40,8 +38,8 @@ if(mysqli_query($connection,$query)){
     return  false;
 }
 }
-//+++++++++++++++++++  +++++++++++++++++++
-//+++++++++++++++++++ create user table if not exists +++++++++++++++++++
+//++++++++++++++++++++++++++++++++++++++
+//+++++++ create user table if not exists +++++++++++++
 function CreateUserTable($TableName,$DatabaseName){
     $dbConn = mysqli_connect("localhost","root","",$DatabaseName);
     $query = "CREATE TABLE IF NOT EXISTS `$TableName`(
@@ -57,7 +55,7 @@ if(mysqli_query($dbConn,$query)){
     return  false;
 }
 }
-//+++++++++++++++++++  +++++++++++++++++++
+//++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++ create CATegory table if not exists +++++++++++++++++++
 function CreateCatTable($TableName,$DatabaseName){
     $dbConn = mysqli_connect("localhost","root","",$DatabaseName);
@@ -74,7 +72,7 @@ if(mysqli_query($dbConn,$query)){
 }
 }
 //++++++++++++++++++++++++++++++++++++++
-//+++++++++++++++++++ create PRODUCTS table if not exists +++++++++++++++++++
+//+++++++++ create PRODUCTS table if not exists +++++++++++++
 function CreateProTable($TableName,$DatabaseName){
     $dbConn = mysqli_connect("localhost","root","",$DatabaseName);
     $query = "CREATE TABLE IF NOT EXISTS `$TableName`(
@@ -135,7 +133,6 @@ function newConn($databaseName){
      $row = mysqli_fetch_assoc($result);
      return $row;
     }
-
 // ++++++++++++++++++++++++++++++++++++++
 // +++++++++++++  Read All Users  +++++++++++++
     function GetUsers($connection){
@@ -159,7 +156,4 @@ function newConn($databaseName){
         return $result;
     }
 // ++++++++++++++++++++++++++++++++++++++
-
-
-// +++++++++++++    +++++++++++++
-// ++++++++++++++++++++++++++++++++++++++
+// +++++++++++++  +++++++++++++

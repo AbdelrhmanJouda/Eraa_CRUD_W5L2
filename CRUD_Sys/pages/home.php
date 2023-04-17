@@ -13,7 +13,7 @@ include "../include/header.php";
           </div>
     <div class="row">
         <div class="col-4 mx-auto border rounded pt-2">
-            <h1>welcome <?=UserName('user');?></h1>
+            <h1>welcome <?=UserName('user')['name'];?></h1>
            
         </div>
     </div>

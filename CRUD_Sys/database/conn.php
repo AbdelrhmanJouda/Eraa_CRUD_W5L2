@@ -6,8 +6,6 @@ const   DB_Password = '';
 // connection //
 $conn = mysqli_connect("localhost","root",""); 
 // +++++++++++++++++++ check connection +++++++++++++++++++
-if($conn){
-    echo "CONNECTED";
-}else {
+if(!$conn){
     die(mysqli_connect_error());
 }
